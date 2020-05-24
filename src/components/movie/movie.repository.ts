@@ -18,7 +18,7 @@ export class MovieRepository {
 
     if (duration) {
       if (!(movieDuration >= duration - 10 && movieDuration <= duration+10)) {
-        matching.isMatch = false;
+        matching.isMatch = !!matching.match;
 
         return matching;
       }
@@ -30,6 +30,8 @@ export class MovieRepository {
         matching.match++;
       }
     }
+
+    matching.isMatch = !!matching.match;
 
      return matching;
   }
