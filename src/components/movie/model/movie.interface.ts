@@ -1,8 +1,8 @@
 export interface IMovie {
   id: number;
   title: string;
-  year: string;
-  runtime: string;
+  year: number;
+  runtime: number;
   genres: string[];
   director: string;
   actors: string;

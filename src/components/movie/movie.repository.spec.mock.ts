@@ -6,8 +6,8 @@ const mockMovies = [
   {
     "id": 1,
     "title": "Beetlejuice",
-    "year": "1988",
-    "runtime": "92",
+    "year": 1988,
+    "runtime": 92,
     "genres": [
       "Comedy",
       "Fantasy"
@@ -20,8 +20,8 @@ const mockMovies = [
   {
     "id": 2,
     "title": "The Cotton Club",
-    "year": "1984",
-    "runtime": "127",
+    "year": 1984,
+    "runtime": 127,
     "genres": [
       "Crime",
       "Drama",
@@ -35,8 +35,8 @@ const mockMovies = [
   {
     "id": 3,
     "title": "The Shawshank Redemption",
-    "year": "1994",
-    "runtime": "130",
+    "year": 1994,
+    "runtime": 130,
     "genres": [
       "Crime",
       "Drama"
@@ -49,8 +49,8 @@ const mockMovies = [
   {
     "id": 4,
     "title": "Chicago",
-    "year": "2002",
-    "runtime": "117",
+    "year": 2002,
+    "runtime": 117,
     "genres": [
       "Crime",
       "Music"
@@ -66,8 +66,8 @@ const expectedFullSearch = [
   {
     "id": 2,
     "title": "The Cotton Club",
-    "year": "1984",
-    "runtime": "127",
+    "year": 1984,
+    "runtime": 127,
     "genres": [
       "Crime",
       "Drama",
@@ -81,8 +81,8 @@ const expectedFullSearch = [
   {
     "id": 3,
     "title": "The Shawshank Redemption",
-    "year": "1994",
-    "runtime": "130",
+    "year": 1994,
+    "runtime": 130,
     "genres": [
       "Crime",
       "Drama"
@@ -95,8 +95,8 @@ const expectedFullSearch = [
   {
     "id": 4,
     "title": "Chicago",
-    "year": "2002",
-    "runtime": "117",
+    "year": 2002,
+    "runtime": 117,
     "genres": [
       "Crime",
       "Music"
