@@ -113,12 +113,12 @@ export class MovieController {
       });
 
     this.router.post('/',
-      json, (req: Request, res: Response) => {
+      json(), (req: Request, res: Response) => {
         const movie: IMovie = req.body;
         const errors = this.validateMovie(movie);
 
         if (errors.length) {
-          res.status(400).json(errors);
+          return res.status(400).json(errors);
         }
 
         try {
@@ -126,7 +126,7 @@ export class MovieController {
 
           res.status(200).json(createdMovie);
         } catch (err) {
-          res.status(500).send(err.message);
+          res.status(400).send(err.message);
         }
     });
   }

@@ -42,6 +42,6 @@ describe ('Movie repository spec', () => {
       actors: '',
       plot: '',
       posterUrl: ''
-      }]);
+    }]);
   });
 });

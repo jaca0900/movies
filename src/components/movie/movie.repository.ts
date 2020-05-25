@@ -84,10 +84,15 @@ export class MovieRepository {
 
   addMovie(movie: IMovie) {
     const movies = this.readMovies();
-    movie.id = movies.length;
+    movie.id = movies.length + 1;
 
+    if (movies.some((mv) => mv.title === movie.title)) {
 
+      throw(new Error('Movie already exists'));
+    }
 
-    this.db.push('/movies', movie, false)
+    this.db.push('/movies', [ movie ], false);
+
+    return movie;
   }
 }
