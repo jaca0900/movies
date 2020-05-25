@@ -11,25 +11,25 @@ describe ('Movie repository spec', () => {
     expectedFullSearch = Mock.expectedFullSearch;
   });
 
-  it('It should properly search for movies By genres and length', () => {
+  it('Should properly search for movies By genres and length', () => {
     const movies = repository.getMoviesByDurationAndGenres(125, ['Crime', 'Music', 'Drama']);
 
     expect(movies).toEqual(expectedFullSearch)
   })
 
-  it('It should properly search mmovies by length only', () => {
+  it('Should properly search mmovies by length only', () => {
     const movies = repository.getMoviesByDurationAndGenres(0, ['Crime', 'Music', 'Drama']);
 
     expect(movies).toEqual(expectedFullSearch);
   })
 
-  it ('It should return a single random movie with no duration and genres', () => {
+  it ('Should return a single random movie with no duration and genres', () => {
     const movies = repository.getMoviesByDurationAndGenres(0, []);
 
     expect(movies.length).toEqual(1);
   });
 
-  it ('It should return a single random movie with duration and no genres', () => {
+  it ('Should return a single random movie with duration and no genres', () => {
     const movies = repository.getMoviesByDurationAndGenres(85, []);
 
     expect(movies).toEqual([{
