@@ -35,8 +35,8 @@ describe ('Movie repository spec', () => {
     expect(movies).toEqual([{
       id: 1,
       title: 'Beetlejuice',
-      year: '1988',
-      runtime: '92',
+      year: 1988,
+      runtime: 92,
       genres: [ 'Comedy', 'Fantasy' ],
       director: '',
       actors: '',

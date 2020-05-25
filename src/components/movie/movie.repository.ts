@@ -5,15 +5,14 @@ export class MovieRepository {
 
   constructor(private db: JsonDB) {}
 
-  private readMovies(): IMovie[] {
+  readMovies(): IMovie[] {
     return this.db.getData('/movies')
   }
 
   private isMathing(movie: IMovie, duration: number, genres: string[]): boolean {
-    const movieDuration = parseInt(movie.runtime);
 
     if (duration) {
-      if (!(movieDuration >= duration - 10 && movieDuration <= duration+10)) {
+      if (!(movie.runtime >= duration - 10 && movie.runtime <= duration+10)) {
         return false
       }
     }
@@ -45,9 +44,8 @@ export class MovieRepository {
     if (!genres.length) {
       if (duration) {
         movies =  movies.filter((movie) => {
-          const movieDuration = parseInt(movie.runtime);
 
-          return movieDuration >= duration - 10 && movieDuration <= duration+10;
+          return movie.runtime >= duration - 10 && movie.runtime <= duration+10;
         })
       }
 
@@ -82,5 +80,14 @@ export class MovieRepository {
 
         return 0;
       });
+  }
+
+  addMovie(movie: IMovie) {
+    const movies = this.readMovies();
+    movie.id = movies.length;
+
+
+
+    this.db.push('/movies', movie, false)
   }
 }
