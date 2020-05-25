@@ -1,5 +1,7 @@
 import { Application, Router, Request, Response } from 'express';
 import { MovieRepository } from './movie.repository';
+import { json } from 'body-parser';
+import { IMovie } from './model/movie.interface';
 
 export class MovieController {
   router: Router;
@@ -32,5 +34,9 @@ export class MovieController {
         res.status(200)
           .json(this.repository.getMoviesByDurationAndGenres(duration, genres));
       });
+
+    this.router.post('/', json, (req: Request, res: Response) => {
+      const movie: IMovie = req.body;
+    });
   }
 }
