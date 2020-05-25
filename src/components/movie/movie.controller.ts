@@ -85,7 +85,7 @@ export class MovieController {
   }
 
   registerRoutes() {
-    this.router.get('/:duration',
+    this.router.get('/byDuration/:duration',
       (req: Request, res: Response) => {
         let genres = req.query.genres as string[];
 
