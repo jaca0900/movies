@@ -1,5 +1,6 @@
 import 'jest';
 import { MovieRepository } from './movie.repository';
+import { JsonDB } from 'node-json-db';
 
 const mockMovies = [
   {
@@ -107,7 +108,7 @@ const expectedFullSearch = [
   },
 ]
 
-const repository = new MovieRepository();
+const repository = new MovieRepository({} as JsonDB);
 
 repository.readMovies = jest.fn();
 // @ts-ignore

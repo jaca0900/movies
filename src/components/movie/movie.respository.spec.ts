@@ -29,7 +29,7 @@ describe ('Movie repository spec', () => {
     expect(movies.length).toEqual(1);
   });
 
-  it ('It should return a single random movie with no duration and genres', () => {
+  it ('It should return a single random movie with duration and no genres', () => {
     const movies = repository.getMoviesByDurationAndGenres(85, []);
 
     expect(movies).toEqual([{

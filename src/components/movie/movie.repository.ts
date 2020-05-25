@@ -1,43 +1,47 @@
 import { IMovie } from './model/movie.interface';
 import { JsonDB } from 'node-json-db';
 
-
 export class MovieRepository {
-  constyructor() {}
 
-  readMovies(): IMovie[] {
-    return [];
+  constructor(private db: JsonDB) {}
+
+  private readMovies(): IMovie[] {
+    return this.db.getData('/movies')
   }
 
-  private getMatching(movie: IMovie, duration: number, genres: string[]): { match: number, isMatch: boolean } {
-    const matching = {
-      match: 0,
-      isMatch: true
-    };
+  private isMathing(movie: IMovie, duration: number, genres: string[]): boolean {
     const movieDuration = parseInt(movie.runtime);
 
     if (duration) {
       if (!(movieDuration >= duration - 10 && movieDuration <= duration+10)) {
-        matching.isMatch = !!matching.match;
-
-        return matching;
+        return false
       }
     }
-
 
     for (const genre of movie.genres) {
       if (genres.some((gen) => genre === gen)) {
-        matching.match++;
+        return true;
       }
     }
 
-    matching.isMatch = !!matching.match;
+    return false;
+  }
 
-     return matching;
+  private getMatchingLevel(movieGenres: string[], genres: string[]): number {
+    let matching = 0;
+
+    for (const genre of movieGenres) {
+      if (genres.some((gen) => genre === gen)) {
+        matching++;
+      }
+    }
+
+    return matching;
   }
 
   getMoviesByDurationAndGenres(duration: number = 0, genres: string[] = []): IMovie[] {
     let movies = this.readMovies();
+
     if (!genres.length) {
       if (duration) {
         movies =  movies.filter((movie) => {
@@ -52,33 +56,31 @@ export class MovieRepository {
       return [movies[randomMovieIndex]];
     }
 
-    return Array.from(movies
-      .reduce((acc, movie) => {
-        const matching = this.getMatching(movie, duration, genres);
+    return movies
+      .filter((movie) => this.isMathing(movie, duration, genres))
+      .sort((movieA, movieB) => {
+        const ARating = this.getMatchingLevel(movieA.genres, genres);
+        const BRating = this.getMatchingLevel(movieB.genres, genres);
 
-        if (!matching.isMatch) {
+        if (ARating !== BRating) {
 
-          return acc;
+          return BRating - ARating;
         }
 
-        const movieGenres = movie.genres.join('');
-        let movieGrouping = acc.get(movieGenres);
+        const genresA = movieA.genres.join(' ');
+        const genresB = movieB.genres.join(' ');
 
-        if (!movieGrouping) {
+        if (genresA < genresB) {
 
-          movieGrouping = {
-            match: matching.match,
-            movies: [],
-          }
+          return -1;
         }
 
-        movieGrouping.movies.push(movie);
-        acc.set(movieGenres, movieGrouping);
+        if (genresA > genresB) {
 
-        return acc
-      }, new Map<string, { match: number, movies: IMovie[] }>())
-      .values())
-      .sort((a, b) =>  b.match - a.match)
-      .reduce((acc: IMovie[], match) => [ ...acc, ...match.movies], [])
+          return 1;
+        }
+
+        return 0;
+      });
   }
 }
