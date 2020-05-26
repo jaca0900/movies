@@ -10,7 +10,7 @@ describe ('Movie Controller validation', () => {
     controller = new MovieController({use: ()=> {}} as Application, Mock.repository, genreRepository);
   })
 
-  it('should return genre list error', () => {
+  it('Should return genre list error', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: 'Beetlejuice',
@@ -29,11 +29,9 @@ describe ('Movie Controller validation', () => {
         message: 'Genre Fantasy is not present in: [ Comedy, Music, Crime ]'
       }
     ])
-
-    console.log(errors);
   })
 
-  it('should return title list error', () => {
+  it('Should return title list error', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: '',
@@ -54,7 +52,7 @@ describe ('Movie Controller validation', () => {
     ]);
   })
 
-  it('should return year list error', () => {
+  it('Should return year list error', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: 'Beetlejuice',
@@ -75,7 +73,7 @@ describe ('Movie Controller validation', () => {
     ]);
   })
 
-  it('should return runtime list error', () => {
+  it('Should return runtime list error', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: 'Beetlejuice',
@@ -96,7 +94,7 @@ describe ('Movie Controller validation', () => {
     ]);
   })
 
-  it('should return director list error', () => {
+  it('Should return director list error', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: 'Beetlejuice',
@@ -117,7 +115,7 @@ describe ('Movie Controller validation', () => {
     ]);
   })
 
-  it ('should return multiple errors', () => {
+  it ('Should return multiple errors', () => {
     const errors = controller.validateMovie({
       id: 1,
       title: '',

@@ -60,6 +60,32 @@ const mockMovies = [
     "plot": "",
     "posterUrl": ""
   },
+  {
+    "id": 5,
+    "title": "The Bank Job",
+    "year": 2008,
+    "runtime": 117,
+    "genres": [
+      "Crime"
+    ],
+    "director": "",
+    "actors": "",
+    "plot": "",
+    "posterUrl": ""
+  },
+  {
+    "id": 5,
+    "title": "Bezsennosc",
+    "year": 2001,
+    "runtime": 100,
+    "genres": [
+      "Crime"
+    ],
+    "director": "",
+    "actors": "",
+    "plot": "",
+    "posterUrl": ""
+  },
 ]
 
 const expectedFullSearch = [
@@ -106,6 +132,36 @@ const expectedFullSearch = [
     "plot": "",
     "posterUrl": ""
   },
+  {
+    "id": 5,
+    "title": "The Bank Job",
+    "year": 2008,
+    "runtime": 117,
+    "genres": [
+      "Crime"
+    ],
+    "director": "",
+    "actors": "",
+    "plot": "",
+    "posterUrl": ""
+  },
+];
+
+const expectedNoDuration = [
+  ... expectedFullSearch,
+  {
+    "id": 5,
+    "title": "Bezsennosc",
+    "year": 2001,
+    "runtime": 100,
+    "genres": [
+      "Crime"
+    ],
+    "director": "",
+    "actors": "",
+    "plot": "",
+    "posterUrl": ""
+  }
 ]
 
 const repository = new MovieRepository({} as JsonDB);
@@ -114,4 +170,4 @@ repository.readMovies = jest.fn();
 // @ts-ignore
 repository.readMovies.mockReturnValue(mockMovies);
 
-export default {repository, expectedFullSearch};
+export default {repository, expectedFullSearch, expectedNoDuration};

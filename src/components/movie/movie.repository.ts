@@ -26,11 +26,11 @@ export class MovieRepository {
     return false;
   }
 
-  private getMatchingLevel(movieGenres: string[], genres: string[]): number {
+  private getMatchingLevel({ genres }: IMovie, lookupGenres: string[]): number {
     let matching = 0;
 
-    for (const genre of movieGenres) {
-      if (genres.some((gen) => genre === gen)) {
+    for (const genre of genres) {
+      if (lookupGenres.some((gen) => genre === gen)) {
         matching++;
       }
     }
@@ -57,28 +57,10 @@ export class MovieRepository {
     return movies
       .filter((movie) => this.isMathing(movie, duration, genres))
       .sort((movieA, movieB) => {
-        const ARating = this.getMatchingLevel(movieA.genres, genres);
-        const BRating = this.getMatchingLevel(movieB.genres, genres);
+        const ARating = this.getMatchingLevel(movieA, genres);
+        const BRating = this.getMatchingLevel(movieB, genres);
 
-        if (ARating !== BRating) {
-
-          return BRating - ARating;
-        }
-
-        const genresA = movieA.genres.join(' ');
-        const genresB = movieB.genres.join(' ');
-
-        if (genresA < genresB) {
-
-          return -1;
-        }
-
-        if (genresA > genresB) {
-
-          return 1;
-        }
-
-        return 0;
+        return BRating - ARating;
       });
   }
 

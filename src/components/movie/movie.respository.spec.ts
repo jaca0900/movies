@@ -4,11 +4,14 @@ import { MovieRepository } from './movie.repository';
 import { IMovie } from './model/movie.interface';
 
 describe ('Movie repository spec', () => {
-  let repository: MovieRepository, expectedFullSearch: IMovie[];
+  let repository: MovieRepository,
+    expectedFullSearch: IMovie[],
+    expectedNoDuration: IMovie[];
 
   beforeAll(() => {
     repository = Mock.repository;
     expectedFullSearch = Mock.expectedFullSearch;
+    expectedNoDuration = Mock.expectedNoDuration;
   });
 
   it('Should properly search for movies By genres and length', () => {
@@ -17,10 +20,10 @@ describe ('Movie repository spec', () => {
     expect(movies).toEqual(expectedFullSearch)
   })
 
-  it('Should properly search mmovies by length only', () => {
+  it('Should properly search mmovies by genres only', () => {
     const movies = repository.getMoviesByDurationAndGenres(0, ['Crime', 'Music', 'Drama']);
 
-    expect(movies).toEqual(expectedFullSearch);
+    expect(movies).toEqual(expectedNoDuration);
   })
 
   it ('Should return a single random movie with no duration and genres', () => {
