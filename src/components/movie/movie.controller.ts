@@ -108,7 +108,7 @@ export class MovieController {
 
           res.status(200).json(movies);
         } catch (err) {
-          res.status(500).send(err.message);
+          res.status(400).send(err.message);
         }
       });
 
